@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mmm:</strong>
+  <%= @avr.mmm_id %>
+</p>
+
+<p>
+  <strong>Type avr:</strong>
+  <%= @avr.type_avr %>
+</p>
+
+<p>
+  <strong>Material:</strong>
+  <%= @avr.material %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @avr.comment %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @avr.user_id %>
+</p>
+
+<p>
+  <strong>Date on:</strong>
+  <%= @avr.date_on %>
+</p>
+
+<p>
+  <strong>Date off:</strong>
+  <%= @avr.date_off %>
+</p>
+
+<%= link_to 'Edit', edit_avr_path(@avr) %> |
+<%= link_to 'Back', avrs_path %>

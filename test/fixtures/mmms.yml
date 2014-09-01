@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mdu: MyString
+  adress: MyString
+  porch: MyString
+  ip: MyString
+  sys_name: MyString
+  ingress: MyString
+  mod: false
+
+two:
+  mdu: MyString
+  adress: MyString
+  porch: MyString
+  ip: MyString
+  sys_name: MyString
+  ingress: MyString
+  mod: false

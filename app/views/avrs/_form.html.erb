@@ -1,0 +1,45 @@
+<%= form_for(@avr) do |f| %>
+  <% if @avr.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@avr.errors.count, "error") %> prohibited this avr from being saved:</h2>
+
+      <ul>
+      <% @avr.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mmm_id %><br>
+    <%= f.number_field :mmm_id %>
+  </div>
+  <div class="field">
+    <%= f.label :type_avr %><br>
+    <%= f.text_field :type_avr %>
+  </div>
+  <div class="field">
+    <%= f.label :material %><br>
+    <%= f.text_field :material %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_field :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :date_on %><br>
+    <%= f.datetime_select :date_on %>
+  </div>
+  <div class="field">
+    <%= f.label :date_off %><br>
+    <%= f.datetime_select :date_off %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

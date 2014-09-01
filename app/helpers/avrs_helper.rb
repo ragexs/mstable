@@ -1,0 +1,2 @@
+module AvrsHelper
+end

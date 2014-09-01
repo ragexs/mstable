@@ -1,0 +1,45 @@
+<%= form_for(@mmm) do |f| %>
+  <% if @mmm.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mmm.errors.count, "error") %> prohibited this mmm from being saved:</h2>
+
+      <ul>
+      <% @mmm.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mdu %><br>
+    <%= f.text_field :mdu %>
+  </div>
+  <div class="field">
+    <%= f.label :adress %><br>
+    <%= f.text_field :adress %>
+  </div>
+  <div class="field">
+    <%= f.label :porch %><br>
+    <%= f.text_field :porch %>
+  </div>
+  <div class="field">
+    <%= f.label :ip %><br>
+    <%= f.text_field :ip %>
+  </div>
+  <div class="field">
+    <%= f.label :sys_name %><br>
+    <%= f.text_field :sys_name %>
+  </div>
+  <div class="field">
+    <%= f.label :ingress %><br>
+    <%= f.text_field :ingress %>
+  </div>
+  <div class="field">
+    <%= f.label :mod %><br>
+    <%= f.check_box :mod %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

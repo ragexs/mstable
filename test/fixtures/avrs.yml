@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mmm_id: 1
+  type_avr: MyString
+  material: MyString
+  comment: MyString
+  user_id: 1
+  date_on: 2014-09-01 16:29:48
+  date_off: 2014-09-01 16:29:48
+
+two:
+  mmm_id: 1
+  type_avr: MyString
+  material: MyString
+  comment: MyString
+  user_id: 1
+  date_on: 2014-09-01 16:29:48
+  date_off: 2014-09-01 16:29:48
