@@ -5,7 +5,10 @@ class AvrsController < ApplicationController
   # GET /avrs
   # GET /avrs.json
   def index
-    @avrs = Avr.all
+    respond_to do |format|
+      format.html
+      format.json { render json: AvrsDatatable.new(view_context) }
+    end
   end
 
   # GET /avrs/1
