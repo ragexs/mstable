@@ -1,4 +1,4 @@
 class Avr < ActiveRecord::Base
-has_many :mmms
-  has_many :users
+  belongs_to :mmm
+  belongs_to :user
 end

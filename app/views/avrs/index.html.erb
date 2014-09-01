@@ -1,6 +1,12 @@
 <h1>Listing avrs</h1>
 
-<table id="avrs" class="display" data-source="<%= avrs_url(format: "json") %>">
+<form action='/avrs/avr.id' method="PUT">
+  <input type="hidden" name="date_off" value="" >
+
+  <submit>Close</submit>
+</form>
+
+<table id="avrs" class="display" data-source="<%= avrs_url(format: "json") %>" data-mdu="<%= params[:mdu] %>">
   <thead>
     <tr>
       <th>Mdu</th>

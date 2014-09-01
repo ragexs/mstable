@@ -1,5 +1,5 @@
 class MmmsDatatable
-  delegate :params, :h, :link_to, :number_to_currency, to: :@view
+  delegate :params, :h, :link_to, :number_to_currency, :new_avr_path, to: :@view
 
   def initialize(view)
     @view = view
@@ -19,7 +19,7 @@ class MmmsDatatable
   def data
     mmms.map do |mmm|
       [
-          ERB::Util.h(mmm.mdu),
+          link_to( ERB::Util.h(mmm.mdu),new_avr_path(mmm_id: mmm.id)),
 
           link_to(mmm.adress, mmm),
           ERB::Util.h(mmm.porch),

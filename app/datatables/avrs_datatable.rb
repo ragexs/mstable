@@ -1,5 +1,5 @@
 class AvrsDatatable
-  delegate :params, :h, :link_to, :number_to_currency, to: :@view
+  delegate :params, :h, :link_to, :number_to_currency, :avrs_path,  to: :@view
 
   def initialize(view)
     @view = view
@@ -19,12 +19,13 @@ class AvrsDatatable
   def data
     avrs.map do |avr|
       [
-          link_to(avr.mdu, avr), #показать все аварии по данной мдю
-          link_to(avr.adress, avr), #показать данное мдю и адрес http://127.0.0.1:3000/mmms/№№№
-          link_to(avr.user, avr), # показать все аварии єтого юзверя
+          link_to(avr.mmm.mdu, avrs_path(mdu: avr.mmm.mdu)), #показать все аварии по данной мдю
+          link_to(avr.mmm.adress, avr), #показать данное мдю и адрес http://127.0.0.1:3000/mmms/№№№
+
           link_to(avr.type_avr, avr),
           ERB::Util.h(avr.material),
           ERB::Util.h(avr.comment),
+          link_to(avr.user.email, avr), # показать все аварии єтого юзверя
           ERB::Util.h(avr.date_on),
           ERB::Util.h(avr.date_off)
       ]
@@ -36,7 +37,9 @@ class AvrsDatatable
   end
 
   def fetch_avrs
-    avrs = Avr.order("#{sort_column} #{sort_direction}")
+    avrs = Avr#.order("#{sort_column} #{sort_direction}")
+    avrs = avrs.joins(:mmm).where(mmms: {mdu: params[:mdu]}) if params[:mdu].present?
+    avrs = avrs.where(date_off: nil) unless params[:mdu].present?
     avrs = avrs.page(page).per_page(per_page)
     if params[:sSearch].present?
       avrs = avrs.where("mdu like :search or adress like :search", search: "%#{params[:sSearch]}%")

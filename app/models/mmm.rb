@@ -1,3 +1,7 @@
 class Mmm < ActiveRecord::Base
-  belongs_to :avr
+  has_many :avrs
+
+  def display
+    "#{mdu} #{adress}"
+  end
 end

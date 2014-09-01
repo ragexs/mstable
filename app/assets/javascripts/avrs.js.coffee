@@ -7,4 +7,8 @@ jQuery ->
     bJQueryUI: true
     bProcessing: true
     bServerSide: true
-    sAjaxSource: $('#avrs').data('source')
+    ajax:
+      url: $('#avrs').data('source')
+      data:
+        mdu: $("#avrs").data('mdu')
+#    sAjaxSource: $('#avrs').data('source')

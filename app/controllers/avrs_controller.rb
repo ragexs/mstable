@@ -18,7 +18,7 @@ class AvrsController < ApplicationController
 
   # GET /avrs/new
   def new
-    @avr = Avr.new
+    @avr = Avr.new(mmm_id: params[:mmm_id])
   end
 
   # GET /avrs/1/edit
