@@ -42,7 +42,7 @@ class AvrsDatatable
     avrs = avrs.where(date_off: nil) unless params[:mdu].present?
     avrs = avrs.page(page).per_page(per_page)
     if params[:sSearch].present?
-      avrs = avrs.where("mdu like :search or adress like :search", search: "%#{params[:sSearch]}%")
+      avrs = avrs.joins(:mmm).where("mdu like :search or adress like :search", search: "%#{params[:sSearch]}%")
     end
     avrs
   end
