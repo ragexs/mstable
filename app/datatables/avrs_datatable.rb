@@ -25,7 +25,7 @@ class AvrsDatatable
           link_to(avr.type_avr, avr),
           ERB::Util.h(avr.material),
           ERB::Util.h(avr.comment),
-          link_to(avr.user.email, avr), # показать все аварии єтого юзверя
+          link_to(avr.user.email, avrs_path(email: avr.user.email)), # показать все аварии єтого юзверя
           ERB::Util.h(avr.date_on),
           ERB::Util.h(avr.date_off)
       ]
@@ -39,6 +39,7 @@ class AvrsDatatable
   def fetch_avrs
     avrs = Avr#.order("#{sort_column} #{sort_direction}")
     avrs = avrs.joins(:mmm).where(mmms: {mdu: params[:mdu]}) if params[:mdu].present?
+    avrs = avrs.joins(:user).where(users: {email: params[:email]}) if params[:email].present?
     avrs = avrs.where(date_off: nil) unless params[:mdu].present?
     avrs = avrs.page(page).per_page(per_page)
     if params[:sSearch].present?
