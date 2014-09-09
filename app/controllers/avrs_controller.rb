@@ -6,7 +6,9 @@ class AvrsController < ApplicationController
   # GET /avrs.json
   def index
     respond_to do |format|
-      format.html
+      format.html {
+        @filter_options = params.slice(:mdu, :user_id)
+      }
       format.json { render json: AvrsDatatable.new(view_context) }
     end
   end

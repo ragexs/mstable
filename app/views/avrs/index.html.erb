@@ -3,10 +3,10 @@
 <form action='/avrs/avr.id' method="PUT">
   <input type="hidden" name="date_off" value="" >
 
-  <submit>Close</submit>
+  <input type="submit">Close</input>
 </form>
 
-<table id="avrs" class="display" data-source="<%= avrs_url(format: "json") %>" data-mdu="<%= params[:mdu] %>">
+<table id="avrs" class="display" data-source="<%= avrs_url(format: "json") %>" data-options="<%= @filter_options.to_json %>">
   <thead>
     <tr>
       <th>Mdu</th>

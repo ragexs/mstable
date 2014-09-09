@@ -9,9 +9,4 @@ jQuery ->
     bServerSide: true
     ajax:
       url: $('#avrs').data('source')
-
-      data:
-        email: $("#avrs").data('email')
-        mdu: $("#avrs").data('mdu')
-
-# sAjaxSource: $('#avrs').data('source')
+      data: $("#avrs").data('options')
