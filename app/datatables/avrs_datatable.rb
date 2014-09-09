@@ -18,6 +18,7 @@ class AvrsDatatable
 
   def data
     avrs.map do |avr|
+      next unless avr.mmm
       [
           link_to(avr.mmm.mdu, avrs_path(mdu: avr.mmm.mdu)), #показать все аварии по данной мдю
           link_to(avr.mmm.adress, avr), #показать данное мдю и адрес http://127.0.0.1:3000/mmms/№№№
@@ -29,7 +30,7 @@ class AvrsDatatable
           ERB::Util.h(avr.date_on),
           ERB::Util.h(avr.date_off)
       ]
-    end
+    end.compact
   end
 
   def avrs
@@ -41,8 +42,8 @@ class AvrsDatatable
     avrs = avrs.joins(:mmm).where(mmms: {mdu: params[:mdu]}) if params[:mdu].present?
     avrs = avrs.where(date_off: nil) unless params[:mdu].present?
     avrs = avrs.page(page).per_page(per_page)
-    if params[:sSearch].present?
-      avrs = avrs.joins(:mmm).where("mdu like :search or adress like :search", search: "%#{params[:sSearch]}%")
+    if params[:search][:value].present?
+      avrs = avrs.joins(:mmm).where("mdu like :search or adress like :search", search: "%#{params[:search][:value]}%")
     end
     avrs
   end
