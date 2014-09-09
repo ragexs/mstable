@@ -38,10 +38,11 @@ class AvrsDatatable
   end
 
   def fetch_avrs
-    avrs = Avr#.order("#{sort_column} #{sort_direction}")
+    avrs = Avr
     avrs = avrs.joins(:mmm).where(mmms: {mdu: params[:mdu]}) if params[:mdu].present?
     avrs = avrs.joins(:user).where(users: {email: params[:email]}) if params[:email].present?
     avrs = avrs.where(date_off: nil) unless params[:mdu].present?
+    # avrs = avrs.order("#{sort_column} #{sort_direction}")
     avrs = avrs.page(page).per_page(per_page)
     if params[:search][:value].present?
       avrs = avrs.joins(:mmm).where("mdu like :search or adress like :search", search: "%#{params[:search][:value]}%")
@@ -50,19 +51,19 @@ class AvrsDatatable
   end
 
   def page
-    params[:iDisplayStart].to_i/per_page + 1
+    params[:start].to_i/per_page + 1
   end
 
   def per_page
-    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 20
+    params[:length].to_i > 0 ? params[:length].to_i : 20
   end
 
   def sort_column
-    columns = %w[ mdu released_on adress]
-    columns[params[:iSortCol_0].to_i]
+    columns = %w[mmms.mdu mmms.adress]
+    columns[params[:order]["0"]["column"].to_i]
   end
 
   def sort_direction
-    params[:sSortDir_0] == "desc" ? "desc" : "asc"
+    params[:order]["0"]["dir"]
   end
 end
