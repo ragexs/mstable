@@ -30,12 +30,14 @@
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= f.collection_select :user_id, User.order(:id), :id, :email, {}, {multiple: false} %>
+
   </div>
   <div class="field">
     <%= f.label :date_on %><br>
     <%= f.datetime_select :date_on %>
   </div>
+
 
   <div class="actions">
     <%= f.submit %>

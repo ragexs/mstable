@@ -11,6 +11,8 @@
   <% else %>
       <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
   <% end %>
+ <b> <%= link_to 'Аварии', avrs_path %></b>
+  <b> <%= link_to 'База', mmms_path %></b>
 </head>
 <body>
 <p class="notice"><%= notice %></p>
