@@ -39,10 +39,11 @@ class AvrsDatatable
 
   def fetch_avrs
     avrs = Avr
-    avrs = avrs.joins(:mmm).where(mmms: {mdu: params[:mdu]}) if params[:mdu].present?
-    avrs = avrs.joins(:user).where(users: {email: params[:email]}) if params[:email].present?
+    avrs = avrs.joins(:mmm).joins(:user)
+    avrs = avrs.where(mmms: {mdu: params[:mdu]}) if params[:mdu].present?
+    avrs = avrs.where(users: {email: params[:email]}) if params[:email].present?
     avrs = avrs.where(date_off: nil) unless params[:mdu].present?
-    # avrs = avrs.order("#{sort_column} #{sort_direction}")
+    avrs = avrs.order("#{sort_column} #{sort_direction}")
     avrs = avrs.page(page).per_page(per_page)
     if params[:search][:value].present?
       avrs = avrs.joins(:mmm).where("mdu like :search or adress like :search", search: "%#{params[:search][:value]}%")
@@ -59,8 +60,8 @@ class AvrsDatatable
   end
 
   def sort_column
-    columns = %w[mmms.mdu mmms.adress]
-    columns[params[:order]["0"]["column"].to_i]
+    columns = %w[mmms.mdu mmms.adress type_avr material comment users.email date_on date_off]
+    columns[params[:order]["0"]["column"].to_i] || "date_on"
   end
 
   def sort_direction
