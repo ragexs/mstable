@@ -1,5 +1,5 @@
 class AvrsDatatable
-  delegate :params, :h, :link_to, :number_to_currency, :avrs_path,  to: :@view
+  delegate :params, :h, :link_to, :number_to_currency, :avrs_path, :content_tag, :form_for, :hidden_field_tag,  to: :@view
 
   def initialize(view)
     @view = view
@@ -28,7 +28,11 @@ class AvrsDatatable
           ERB::Util.h(avr.comment),
           link_to(avr.user.email, avrs_path(user_id: avr.user.id)), # показать все аварии єтого юзверя
           ERB::Util.h(avr.date_on),
-          ERB::Util.h(avr.date_off)
+          ERB::Util.h(avr.date_off),
+          form_for(avr) do |f|
+            f.hidden_field(:date_off, value: Time.now.to_s) + f.submit("Close") +
+              hidden_field_tag(:go_back, 1)
+          end
       ]
     end.compact
   end

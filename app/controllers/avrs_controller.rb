@@ -48,7 +48,13 @@ class AvrsController < ApplicationController
   def update
     respond_to do |format|
       if @avr.update(avr_params)
-        format.html { redirect_to @avr, notice: 'Avr was successfully updated.' }
+        format.html {
+          if params[:go_back]
+            redirect_to :back
+          else
+            redirect_to @avr, notice: 'Avr was successfully updated.'
+          end
+        }
         format.json { render :show, status: :ok, location: @avr }
       else
         format.html { render :edit }
