@@ -11,11 +11,18 @@
     </div>
   <% end %>
 
+  <% if @avr.mmm %>
   <div class="field">
     <%= f.label :mmm %><br>
     <%= f.hidden_field :mmm_id %>
     <b><%= @avr.mmm.display %></b>
   </div>
+  <% else %>
+    <div class="field">
+      <%= f.label :mmm %><br>
+      <%= f.collection_select :mmm_id, Mmm.order(:id), :id, :display, {}, {multiple: false} %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :type_avr %><br>
     <%= f.text_field :type_avr %>
@@ -31,7 +38,6 @@
   <div class="field">
     <%= f.label :user_id %><br>
     <%= f.collection_select :user_id, User.order(:id), :id, :email, {}, {multiple: false} %>
-
   </div>
   <div class="field">
     <%= f.label :date_on %><br>
